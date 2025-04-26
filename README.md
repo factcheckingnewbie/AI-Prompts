@@ -1,1 +1,1 @@
-# Just anther repo with AI prompts
+# Just another repo with AI prompts
