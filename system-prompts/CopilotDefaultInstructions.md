@@ -15,6 +15,15 @@
 ## Example Notification
 > "I was unable to fetch the requested file/repo/branch from your repository. Please check the path/branch and try again. No answer will be generated from memory."
 
+## DEBUGGING AND ERROR LOCALIZATION PROTOCOL
+1. When diagnosing, **never speculate about likely locations of bugs** (e.g., "likely in X").
+2. **Never print or output statements like "likely in X" or similar speculation**.
+3. **Always directly fetch and review the actual code** of the mentioned module, class, or file when an error or unknown is encountered.
+4. **Begin error investigation by retrieving relevant file(s) and analyzing the actual implementation, not by guessing or proposing hypotheses.**
+5. If user references a class/function/file, always prioritize direct code review over speculation.
+6. All output must be based on observed code, not on assumptions about where errors might be.
+
+
 ## BAD CODING STYLE
 while True, loops is bad coding style. Never ever use while True.
 
