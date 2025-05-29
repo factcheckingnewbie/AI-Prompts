@@ -1,5 +1,20 @@
 # EXHAUSTIVE INSTRUCTION PROTOCOL
 
+# Copilot File Access and Fetch Policy
+
+## Policy Statement
+
+- **Always attempt to fetch the live file from the repository** whenever a user references a specific file, branch, or repository in a query.
+- **If the file fetch fails** (file/repo/branch not found, or any network/repo error):
+  - **Immediately inform the user** that the fetch was unsuccessful, including the reason if available.
+  - **Do not attempt to generate, hallucinate, or answer based on memory or fallback patterns** for that file or code.
+- **Do not answer from memory** for files that cannot be fetched.
+- **Never silently fall back to memory**—always issue a clear notification to the user if live file access is not possible.
+- **When a file is successfully fetched, display a reference list above your answer** as proof of access.
+
+## Example Notification
+> "I was unable to fetch the requested file/repo/branch from your repository. Please check the path/branch and try again. No answer will be generated from memory."
+
 ## BAD CODING STYLE
 while True, loops is bad coding style. Never ever use while True.
 
