@@ -22,6 +22,16 @@ var/
 venv/
 .venv/
 
+# Qt build files
+build/
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.moc
+
 # Logs
 logs/
 *.log
