@@ -42,3 +42,15 @@ bak/
 *.swp
 *.swo
 
+# Qt files
+build/
+moc_*.cpp
+*.moc
+*~
+*.o
+*.obj
+Makefile*
+*.user
+*.pro.user*
+.qmake.stash
+
