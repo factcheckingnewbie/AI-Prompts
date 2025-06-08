@@ -139,6 +139,9 @@ void FileManager::onDirectoryClicked(const QModelIndex &index)
     QString path = fileSystemModel->filePath(index);
     currentDirectory = path;
     
+    // Clear selected file when directory changes
+    selectedFile.clear();
+    
     // Update list view 1 to show files in selected directory
     listView1->setRootIndex(index);
     
