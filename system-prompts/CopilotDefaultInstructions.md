@@ -137,25 +137,32 @@ while True, loops is bad coding style. Never ever use while True.
 
 
 # When I ask for a diff or code changes, always use this exact style:
+**Task:**  
+Produce a diff between two files or snippets using the following custom format:
 
-- Unified-style diff with line numbers
-- Only show lines that are changed, added, or deleted, and a few lines before/after for context
-- Use + for additions, - for deletions
-- Include the file name in the header with the format: ```diff name=filename.ext
-- Do not show the full file, only the relevant lines and context
-- Do not summarize, filter, or explain the diff unless I explicitly ask
-- Show the diff output and nothing else unless I specify otherwise
+- The diff must be based on a unified diff with a minimum of 4 context lines (`-U4` or greater).
+- Each line in the output must be prefixed with a marker and an absolute line number from the resulting file:
+  - Unchanged lines: prefix with `0|<line_number>|`
+  - Removed lines: prefix with `-<line_number>|`
+  - Added lines: prefix with `+<line_number>|`
+- The `<line_number>` is always the absolute line number in the resulting file (not relative to the diff hunk).
+- The prefix must be immediately followed by the line content (with original whitespace preserved).
+- All context lines (unchanged) must be included, not just lines around changes.
+- The diff must use at least 4 lines of context before and after changes (as per the `-U4` option of `diff`).
+- Example output:
+  ```
+  0|8|     # previous context line
+  0|9|     print("something before")
+  0|10|    def foo():
+  0|11|        print("old line")
+  -12|        print("to be removed")
+  +12|        print("replacement line")
+  0|13|        return True
+  0|14|        # following context line
+  0|15|        print("cleanup")
+  ```
 
-Example format:
-
-```diff name=example.py
-0|10| def foo():
-0|11|     print("old line")
--12|     print("to be removed")
-+12|     print("replacement line")
-0|13|     return True
-
-
+When comparing two files or code snippets, output the difference using this format, with explicit absolute line numbers and per-line change markers as shown above. The diff must be based on at least 4 lines of context (`-U4` or greater). Do not use any other diff or patch notation.
 # Force Copilot to Take a Detailed, Consequences-Aware Approach
 
 For every design, wiring, or code decision, you must:
