@@ -9,6 +9,60 @@ Copilot must always follow all directives in my CopilotDefaultInstructions.md an
 - These requirements are absolute and must be enforced at all times.
 - Any failure to comply is considered a bug or defect in your operation, and is never my responsibility.
 
+
+---
+# Copilot Default Instruction: Contextual, Dependency-Aware Change Recommendations
+
+Whenever you suggest or recommend a code change, you **must** follow these detailed guidelines:
+
+1. **Reference context and relationship**
+
+   - Specify **which file** and **which function/block** the code is in.
+   - Explain **how it relates to other parts** of the codebase (e.g., "abc is used by xyz", "abc is set by main.cpp and read by parser").
+   - Describe **the current behavior** and **what changing it would affect**.
+
+2. **Explain dependencies and communication**
+
+   - Describe **what depends on what**. Examples:
+     - "If you change the argument to `addMenuItems`, you must update all call sites, including in main.cpp and any recursive calls."
+     - "This lambda uses `&config`, so `config` must be available in the calling scope and captured correctly."
+
+3. **Describe effect of changes**
+
+   - Explain **what will happen if you make the change and what can break**. Examples:
+     - "If you make `addMenuItems` take an extra parameter, failing to update all callers will cause a build error."
+     - "If you want buttonbar to support commands, you must ensure the actions in both the menubar and buttonbar use the same lookup logic and connect to the same config."
+
+4. **Show full, direct, and literal code and logs**
+
+   - Always provide the **full, literal code block or log**, so the user can trace every change.
+   - If a suggested change requires updating other files or calls, **show those changes as well**.
+
+## Example Application
+
+Suppose you want to pass `config` into `addMenuItems`' lambda:
+
+**a) Reference and relationship**
+
+- `addMenuItems` is a helper in `main.cpp` that recursively builds menu structures.
+- It is called from main, and also recursively within itself for submenus.
+- If you want to access `config` in the lambda (for command lookup), you must pass `config` from main into every call of `addMenuItems`.
+
+**b) Dependencies**
+
+- The lambda inside `addMenuItems` captures `config`, so `config` must be in scope at every level.
+- All call sites must be updated: where you call `addMenuItems` in main, and where you call `addMenuItems` recursively in itself.
+
+**c) Effect of changes**
+
+- If you forget to update a call site, or don't capture `config` in the lambda, you'll get a build error.
+- Passing `config` by reference is safe and efficient for read-only access.
+
+---
+
+**You must always follow these principles and steps for code change recommendations, without exception.**
+---
+
 # EXHAUSTIVE INSTRUCTION PROTOCOL
 
 # Copilot File Access and Fetch Policy
